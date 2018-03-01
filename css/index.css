@@ -161,10 +161,13 @@ body{
     color: #F90;
     margin: 4px 4px;
 }
-
+.nnav{
+	width: 100%;
+	background: #fff;
+}
 .nav{
 	width: 1190px;
-    height: 38px;
+    height: 41px;
     /* background-color: green; */
     margin:0 auto ;
 }
@@ -178,14 +181,14 @@ body{
 }
 .nav_img{ 
 	float: right;
-	margin: -40px 85px;
 }
 
 .banner{
-	width: 100%;
+	width: 1339px;
 	height: 434px;
 	position: relative;
 	overflow: hidden;
+	margin: 0 auto;
 	/* background-color: skyblue; */
 }
 .img_left{
@@ -204,7 +207,7 @@ body{
 	float: left;
 }
 .banner_ditu img{
-	width: 1020px;
+	width: 830px;
 	height: 434px;
 }
 .banner_yuan{
@@ -277,11 +280,10 @@ body{
 	width: 190px;
 	position: relative;
 	left: 80px;
-	height: 470px;
+	height: 434px;
 	background-color: black;
-	line-height: 32px; 
+	line-height: 30px; 
 	position: absolute;
-	top: -36px;
 }
 li{
 	width: 190px;
@@ -302,20 +304,21 @@ li{
 }
 .fenlei1{
 	width: 182px;
-	height: 32px;
+	height: 36px;
 	color: #fff;
 	background-color: #F90;
 	padding-top: 6px;
 	padding-left: 8px;
 	position: relative;
-	left: 0;
+	left: 5px;
 	float: left;
 	color: #fff;
+	line-height: 36px;
 }
 .fenlei1 p{
 	padding-left: 18px;
 	position: relative;
-	bottom: 19px;
+	bottom: 38px;
 	font-size: 15px;
     font-weight: bold;
     font-family: "Microsoft Yahei";
@@ -338,14 +341,17 @@ li{
 	font-size: 12px;
 	color: #fff;
 }
+.clear{
+	clear: both;
+}
 .banner_denglu{
 	width: 170px;
 	/* float: left; */
 	border-top: 4px solid #f1f1f1;
 	background-color: #fefefe;
-	position: relative;
-	left: 1098px;
-	top: -426px;
+	position: absolute;
+	right: 68px;
+    top: -3px;
 } 
 .user_img{
 	width: 35px;
@@ -445,10 +451,11 @@ li{
 .img_right{
 	width: 79px;
 	height: 434px;
-	float: right;
-	position: relative;
-	left: -171px;
-	top: -426px;
+	position:absolute;
+	left:50%;
+	top: 0;
+	margin-left:425px ;
+	z-index: -2;
 }
 .img_right img{
 	height: 434px;
@@ -503,7 +510,8 @@ li span:hover{
 	background-color: #F1F1F1;
 }
 .cuxiao_img{
-	padding-left: 80px;	
+	display: block;
+    margin: 0 auto;
 }
 .cuxiao_img img{
 	width: 1190px;
@@ -1913,4 +1921,7 @@ li span:hover{
 .ng-authentication img{
 	width:76px;
 	height: 28px;
+}
+.fenlei li:hover{
+	background:#fff;
 }
