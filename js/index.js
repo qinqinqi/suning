@@ -131,9 +131,11 @@
 	{
 	let tips=document.querySelectorAll(".tips");
 	let container=document.querySelectorAll(".container");
+	var flag=true;
 	tips.forEach(function(ele,index){
 		ele.onclick=function(){
-			let ot=container[index].offsetTop;
+			flag=false;
+			let ot=container[index].offsetTop-70;
 			let now=document.documentElement.scrollTop;
 			let speed=(ot-now)/8;
 			let time=0;
@@ -142,22 +144,25 @@
 				now+=speed;
 				if(time===200){
 					clearInterval(t);
+					flag=true;
 				}
 				document.documentElement.scrollTop=now;
 			},25)
 		}
 	});
 	window.addEventListener("scroll",function(){
-		let st=document.documentElement.scrollTop;
-		for(let i=0;i<container.length;i++){
-			if(st>container[i].offsetTop-50){
-				for(let i=0;i<tips.length;i++){
-					tips[i].classList.remove("active");
+		if(flag){		
+			let st=document.documentElement.scrollTop;
+			for(let i=0;i<container.length;i++){
+				if(st>=container[i].offsetTop-70){
+					for(let i=0;i<tips.length;i++){
+						tips[i].classList.remove("active");
+					}
+					tips[i].classList.add("active");
 				}
-				tips[i].classList.add("active");
 			}
-		}
-	})
+		}		
+	});
 	}
 }
 
@@ -183,81 +188,116 @@
 
 // 好货效果
 {
-	function content(parent){
-		let next=parent.querySelector(".best3_tanright");
-		let prev=parent.querySelector(".best3_tanleft");
-		let inner=parent.querySelector(".best3_inner");
-		let item=parent.querySelectorAll(".best3_inner_content");
-		let parges=parent.querySelectorAll(".yuan a");
-		let n=0;
-		next.onclick=function(){
-			n++;
-			if(n===item.length){
-				n=item.length-1;
-				return;
-			}
-			inner.style.marginLeft=n*-390+"px";
-			parges[n].classList.add("yuan_active");
-			parges[n-1].classList.remove("yuan_active");
-			obj=parges[n];
-		}
-		prev.onclick=function(){
-			n--;
-			if(n<0){
-				n=0;
-				return;
-			}
-			inner.style.marginLeft=n*-390+"px";
-			parges[n+1].classList.remove("yuan_active");
-			parges[n].classList.add("yuan_active");
-			obj=parges[n];
-		}
-		let obj=parges[0];
-		parges.forEach(function(ele,index){
-			ele.onclick=function(){
-				obj.classList.remove("yuan_active");
-				ele.classList.add("yuan_active");
-				obj=ele;
-				inner.style.marginLeft=index*-390+"px";
-				n=index;
-			}
-		});
-	}
-	const contentList=document.querySelectorAll(".best3_content");
-	contentList.forEach(function(ele){
-		content(ele);
-	});
-	// content(contentList[0]);
+    function content(parent){
+        let next=parent.querySelector(".best3_tanright");
+        let prev=parent.querySelector(".best3_tanleft");
+        let inner=parent.querySelector(".best3_inner");
+        let item=parent.querySelectorAll(".best3_inner_content");
+        let parges=parent.querySelectorAll(".yuan a");
+        let n=0,i=0;
+        next.onclick=function(){
+            if(flag){
+                flag=false;
+                n++;
+                inner.style.transition="all 1s";
+                inner.style.marginLeft=-390*n+"px";
+                if(i<3) {
+                    i++;
+                    if(i>=3){
+                        parges[i-1].classList.remove("yuan_active");
+                        i=0;
+                    }
+                    parges[i].classList.add("yuan_active");
+                    parges[i- 1].classList.remove("yuan_active");
+                }
+                obj = parges[i];
+            }
+        }
+        prev.onclick=function(){
+            if(flag){
+                flag=false;
+                n--;
+                if(n<0){
+                    flag=false;
+                    n=2;
+                    inner.style.marginLeft=-390*n+"px";
+                }
+                inner.style.transition="all 1s";
+                inner.style.marginLeft=-390*n+"px";
+                if(i<3) {
+                    i--;
+                    if(i<0){
+                        parges[0].classList.remove("yuan_active");
+                        i=2;
+                        parges[2].classList.add("yuan_active");
+                    }
+                    parges[i].classList.add("yuan_active");
+                    parges[i+1].classList.remove("yuan_active");
+                }
+                obj = parges[i];
+            }
+        }
+        inner.addEventListener("transitionend",function(){
+            flag=true;
+            if(n===4){
+                inner.style.transition="none";
+                inner.style.marginLeft=-390+"px";
+                n=1;
+            }
+            if(n===0){
+                inner.style.transition="none";
+                inner.style.marginLeft=-390*3+"px";
+                n=3;
+            }
+        })
+        let obj=parges[1];
+        parges.forEach(function(ele,index){
+            ele.onclick=function(){
+                obj.classList.remove("yuan_active");
+                ele.classList.add("yuan_active");
+                obj=ele;
+                inner.style.marginLeft=index*-390+"px";
+                n=index;
+            }
+        });
+    }
+
+    const contentList=document.querySelectorAll(".best3_content");
+    contentList.forEach(function(ele){
+        content(ele);
+    });
+    // content(contentList[0]);
 }
+
+
 
 //小视频效果
 {
-	function content(parent){
-		let next=parent.querySelector(".small_right");
-		let prev=parent.querySelector(".small_left");
-		let inner=parent.querySelector(".best3_inner");
-		let item=parent.querySelectorAll(".best3_inner_content");
-		let n=0;
-		next.onclick=function(){
-			n++;
-			if(n===item.length){
-				n=item.length-1;
-				return;
-			}
-			inner.style.marginLeft=n*-394+"px";
-		}
-		prev.onclick=function(){
-			n--;
-			if(n<0){
-				n=0;
-				return;
-			}
-			inner.style.marginLeft=n*-394+"px";
-		}
-	}
-	const contentList=document.querySelectorAll(".smallshow");
-	contentList.forEach(function(ele){
-		content(ele);
-	});
-	// content(contentList[0]);
+        function content(parent){
+            let next=parent.querySelector(".small_right");
+            let prev=parent.querySelector(".small_left");
+            let inner=parent.querySelector(".best3_inner");
+            let item=parent.querySelectorAll(".best3_inner_content");
+            let n=0;
+            next.onclick=function(){
+                n++;
+                if(n===item.length){
+                    n=item.length-1;
+                    return;
+                }
+                inner.style.marginLeft=n*-394+"px";
+            }
+            prev.onclick=function(){
+                n--;
+                if(n<0){
+                    n=0;
+                    return;
+                }
+                inner.style.marginLeft=n*-394+"px";
+            }
+        }
+        const contentList=document.querySelectorAll(".smallshow");
+        contentList.forEach(function(ele){
+            content(ele);
+        });
 }

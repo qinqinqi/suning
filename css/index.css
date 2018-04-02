@@ -840,7 +840,8 @@ li span:hover{
 	overflow: hidden;
 }
 .best3_inner{
-	width:2000px;
+	transition:all 1s;
+	width:3000px;
 }
 .best3_inner_content{
 	float:left;
@@ -2121,7 +2122,7 @@ li span:hover{
     user-select:none;
 }
 .right_item{
-	margin-top:160px;
+	margin-top:150px;
 	width:100%;
 	height:462px;
 	/* background:pink; */
@@ -2132,11 +2133,12 @@ li span:hover{
 	line-height:40px;
 	padding: 9px 8px;
 	text-align:center;
+	background:#383838;
 }
-.right_item span:hover,.right_item_top:hover{
-	background:#f90;
-	color:#fff;
-}
+/*.right_item span:hover,{*/
+	/*background:#f90;*/
+	/*color:#fff;*/
+/*}*/
 .right_item p{
 	font-size:12px;
 }
@@ -2163,13 +2165,35 @@ li span:hover{
 	margin:0 auto;
 	line-height:18px;
 }
+.right_item_top{
+	width:35px;
+	height:39px;
+	background: #383838;
+	position: relative;
+}
 .right_item_top p{
 	margin-top:-16px;
 	font-size:4px;
 }
 .right_item_top span{
-	padding:0;
+	padding:9px 0;
 }
+.right_item span:hover,.right_item_top:hover span,.right_item_top:hover p{
+	background:#f90;
+	color:#fff;
+}
+.top_tan{
+	height: 31px;
+	line-height: 30px;
+	width:73px;
+	position:absolute;
+	left:35px;
+	z-index:999;
+}
+.right_item_top span:hover .top_tan{
+	left:-70px;
+}
+
 /* 右边固定部分结束 */
 .banner_inner{
 	position:absolute;
@@ -2221,3 +2245,28 @@ li span:hover{
 .wenzi_color{
 	color:#f90!important;
 }
+/*右侧弹窗效果*/
+.box{
+	position:relative;
+	cursor: pointer;
+	user-select:none;
+}
+.item{
+	width:73px;
+	height:39px;
+	background:#f90;
+	color:#fff;
+	line-height:39px;
+	text-align:left;
+	padding-left:10px;
+	position:absolute;
+	top:0;
+	left:35px;
+	font-size:12px;
+	transition:all 1s ease-out;
+	z-index:-1;
+}
+.box:hover .item{
+	left:-70px;
+}
+
